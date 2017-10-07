@@ -34,6 +34,9 @@ input.each do |request|
   categoryrequests[req[0]] = req[1].to_i
 end
 
+print "Input new folder name: "
+dir_name = gets.chomp.delete(" ")
+
 # make test array for each category
 master = Array.new
 categories.each do |category|
@@ -69,6 +72,12 @@ end
 practice_test.close
 spec.close
 solution.close
+
+# move files to new folder
+bash_commands = "mkdir #{dir_name} && cp .rspec ./#{dir_name} && " +
+"mv practice_test.rb ./#{dir_name} && mv spec.rb ./#{dir_name} && " +
+"mv solution.rb ./#{dir_name} && cp Gemfile ./#{dir_name}"
+system(bash_commands)
 
 puts
 puts "Done!"
